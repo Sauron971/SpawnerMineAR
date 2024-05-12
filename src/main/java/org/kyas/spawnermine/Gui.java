@@ -42,7 +42,7 @@ public class Gui implements InventoryHolder, Listener {
         this.plugin = plugin;
         this.index = plugin.getConfig().getInt("counterOfMines");
     }
-
+    //Заполнение gui предметами
     public void createGui() {
         this.inventory = Bukkit.createInventory(this, 27, ChatColor.translateAlternateColorCodes('&', "Создать точку спавна руды"));
         // Добавляем предметы в инвентарь
@@ -86,13 +86,13 @@ public class Gui implements InventoryHolder, Listener {
     public void openGui(Player player) {
         player.openInventory(inventory);
     }
-
+    //Скопировать nbt теги предмета и сравнить их
     private boolean copyAndEquals(ItemStack from, ItemStack to) {
         ItemMeta f = from.getItemMeta();
         to.setItemMeta(f);
         return from.equals(to);
     }
-
+    //Округление координат, чтобы не было погрешности при заполнение
     private Location roundLoc(World w, Location loc) {
         double x = (int) loc.getX();
         double y = (int) loc.getY();
@@ -100,7 +100,7 @@ public class Gui implements InventoryHolder, Listener {
 
         return new Location(w, x, y, z);
     }
-
+    //Проверка находится ли на этих координатах уже установленная шахта
     private boolean checkMine(Location loc) {
         double locX = loc.getX();
         double locY = loc.getY();
@@ -120,7 +120,7 @@ public class Gui implements InventoryHolder, Listener {
         }
         return false;
     }
-
+    // Сохраняем в конфиг координаты и материал
     private boolean saveToConfig(Location loc, String mat) {
         if (checkMine(loc)) {
             return false;
@@ -162,6 +162,7 @@ public class Gui implements InventoryHolder, Listener {
         if (event.getInventory().getHolder() instanceof Gui) {
             event.setCancelled(true);
         }
+        // Логика нажатия на все возможные предметы в интерфейсе
         ItemStack currentItem = event.getCurrentItem();
         if (currentItem != null && event.getInventory().getHolder() instanceof Gui) {
             if (copyAndEquals(currentItem, coal)) {

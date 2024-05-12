@@ -29,10 +29,12 @@ public final class MineKyas extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Plugin disabling logic
         Bukkit.getConsoleSender().sendMessage(ChatColor.STRIKETHROUGH + "[MineKyas] Прощай, Кэролайн. Ты победила. Уходи. Было весело. Не возвращайся.");
         Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MineKyas] is disable!");
     }
-
+    // Создаем массив всех центров и материалов находящихся в конфиге
+    // 1 локация 2 материал на этой локации
     public void createArrayMines() {
         locations.clear();
         int times = getConfig().getInt("counterOfMines");

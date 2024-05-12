@@ -17,10 +17,12 @@ public class CmdOpenGui implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, org.bukkit.command.@NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
+            // перезагрузка плагина
             if (strings.length > 0 && strings[0].equalsIgnoreCase("reload")) {
                 plugin.reloadConfig();
                 plugin.createArrayMines();
                 player.sendMessage("§aКонфигурация плагина успешно перезагружена.");
+            // Открываем интерфейс
             } else {
                 Gui g = new Gui();
                 g.openGui(player);

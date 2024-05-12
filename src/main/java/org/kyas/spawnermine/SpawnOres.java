@@ -2,13 +2,9 @@ package org.kyas.spawnermine;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class SpawnOres implements Runnable {
@@ -20,7 +16,7 @@ public class SpawnOres implements Runnable {
     private ArrayList<Material> gold = new ArrayList<>();
     private ArrayList<Material> redstone = new ArrayList<>();
     private ArrayList<Material> amethyst = new ArrayList<>();
-
+// Заполняем массивы для рандомизации заполнения
     public SpawnOres(MineKyas plugin) {
         this.plugin = plugin;
 
@@ -32,7 +28,6 @@ public class SpawnOres implements Runnable {
         iron.add(Material.DEEPSLATE_IRON_ORE);
         gold.add(Material.GOLD_ORE);
         gold.add(Material.DEEPSLATE_GOLD_ORE);
-        amethyst.add(Material.AMETHYST_SHARD);
         redstone.add(Material.REDSTONE_ORE);
         redstone.add(Material.DEEPSLATE_REDSTONE_ORE);
 
@@ -42,7 +37,7 @@ public class SpawnOres implements Runnable {
         gold.add(Material.RAW_GOLD_BLOCK);
         amethyst.add(Material.AMETHYST_BLOCK);
     }
-
+// Высчииываем область относительно центра 5 на 5
     private List<List<Location>> getLocationArray(Location center) {
         List<List<Location>> array = new ArrayList<>();
         int offsetX = 0;
@@ -68,7 +63,7 @@ public class SpawnOres implements Runnable {
         }
         return array;
     }
-
+// Заполняем блоками область 5 на 5
     private void spawnInWorld(List<List<Location>> arrayLocation, String material) {
         for (List<Location> innerList : arrayLocation) {
             for (Location location : innerList) {
@@ -121,12 +116,12 @@ public class SpawnOres implements Runnable {
                     arrayLocation.get(rand.nextInt(5)).get(rand.nextInt(5)).getBlock().setType(gold.get(2));
                     break;
                 case "AMETHYST_SHARD":
-                    arrayLocation.get(rand.nextInt(5)).get(rand.nextInt(5)).getBlock().setType(amethyst.get(1));
+                    arrayLocation.get(rand.nextInt(5)).get(rand.nextInt(5)).getBlock().setType(amethyst.get(0));
                     break;
             }
         }
     }
-
+    //Заполняем руду относительно всех центров в конфиге
     public void spawn() {
         for (int i = 0; i < plugin.locations.size() - 1; i += 2) {
             Location locCenter = (Location) plugin.locations.get(i);
