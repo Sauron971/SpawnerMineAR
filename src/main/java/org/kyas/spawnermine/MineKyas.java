@@ -21,6 +21,7 @@ public final class MineKyas extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "[MineKyas] is enable!");
         this.getCommand("createDotMine").setExecutor(new CmdOpenGui(this));
         getServer().getPluginManager().registerEvents(new Gui(this), this);
+        getServer().getPluginManager().registerEvents(new BarkThreads(), this);
         this.saveDefaultConfig();
         int time = this.getConfig().getInt("per_min_spawn") * 1200;
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SpawnOres(this), 0L, time);
